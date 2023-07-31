@@ -1,0 +1,31 @@
+{%  extends 'base.html' %}
+
+{% block titulo %} Teste Flask Andre Quintas {% endblock %}
+
+{% block conteudo %}
+    <h1>Bem vindo ao banco!</h1>
+    <h2>Dia: {{ dia }}</h2>
+
+    <ol>
+        {% for conta in lista %}
+            <li> <a href="conta/{{ conta.id }}">ID: {{ conta.id }} | {{ conta.nome_proprietario }} - dinheiro: {{ conta.dinheiro }} </a> </li>
+        {% endfor %}
+
+    </ol>
+
+    <h2>Criar Conta</h2>
+    <form method="post" action="{{ url_for("criarconta") }}">
+
+         <input placeholder="Nome:" type="text" id="novoNome"  name="novoNome" class="novoNome"><br>
+         <input placeholder="Dinheiro:" type="number" id="Dinheiro"  name="Dinheiro" class="Dinheiro"><br>
+
+        <input type="submit" value="Nova Conta">
+    </form>
+    <br>
+    <form method="post" action="{{ url_for("passardia") }}">
+        <input type="submit" value="Passar Dia">
+    </form>
+
+
+{% endblock %}
+

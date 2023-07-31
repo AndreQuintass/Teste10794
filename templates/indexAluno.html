@@ -1,0 +1,59 @@
+{%  extends 'conta.html' %}
+
+{% block titulo %} Teste Flask Andre Quintas {% endblock %}
+
+{% block conteudo_aluno %}
+
+    <h1>ID: {{ conta.id }} | {{ conta.nome_proprietario }} - Dinheiro: {{ conta.dinheiro }}€</h1>
+     <hr>
+    <br>
+    <form method="post" action="{{ url_for("voltar") }}">
+        <input type="submit" value="Voltar atrás">
+    </form>
+    <h3>Levantar</h3>
+    <form method="post" action="{{ url_for("levantar") }}">
+
+         <input placeholder="Dinheiro" type="number" id="Dinheiro"  name="Dinheiro" class="Dinheiro"><br>
+
+        <input type="submit" value="Levantar">
+    </form>
+    <br>
+    <h3>Depositar</h3>
+    <form method="post" action="{{ url_for("depositar") }}">
+
+         <input placeholder="Dinheiro" type="number" id="Dinheiro"  name="Dinheiro" class="Dinheiro"><br>
+
+        <input type="submit" value="Depositar">
+    </form>
+    <br>
+    <h3>Enviar</h3>
+    <form method="post" action="{{ url_for("enviar") }}">
+
+         <input placeholder="Dinheiro" type="number" id="Dinheiro"  name="Dinheiro" class="Dinheiro"><br>
+         <select id="id_pessoa" name="id_pessoa" class="id_pessoa">
+             <option value="" disabled selected>Selecione uma pessoa</option>
+                {% for acc in othersList %}
+                    <option value="{{ acc.id }}">{{ acc.nome_proprietario }}</option>
+                {% endfor %}
+         </select>
+
+        <input type="submit" value="Enviar">
+    </form>
+    <br>
+
+    <h2>Registo de acoes</h2>
+    <ul>
+    {% if conta.extrato.__len__() == 0 %}
+        <p>Sem registos para mostrar</p>
+    {% else %}
+        {% for registo in conta.extrato %}
+            <li>{{ registo }}</li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+
+
+
+
+{% endblock %}
+
